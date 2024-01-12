@@ -6,6 +6,7 @@ import {
   SliderFilledTrack,
   SliderThumb,
   Text,
+  Spinner,
 } from "@chakra-ui/react";
 
 interface AirQualitySliderProps {
@@ -13,6 +14,7 @@ interface AirQualitySliderProps {
   minValue: number;
   maxValue: number;
   value: number;
+  isLoading: boolean;
 }
 
 export const AirQualitySlider: React.FC<AirQualitySliderProps> = ({
@@ -20,6 +22,7 @@ export const AirQualitySlider: React.FC<AirQualitySliderProps> = ({
   minValue,
   maxValue,
   value,
+  isLoading,
 }) => {
   return (
     <Flex
@@ -31,33 +34,47 @@ export const AirQualitySlider: React.FC<AirQualitySliderProps> = ({
       px="4"
       gap="5"
     >
-      <Flex mt="3">
-        <Text fontWeight="bold" fontSize="xl" color="#525252">
-          {title}
-        </Text>
-      </Flex>
-      <Slider
-        min={minValue}
-        max={maxValue}
-        value={value}
-        aria-label={`slider-${title.replace(/\s/g, "-").toLowerCase()}`}
-        colorScheme="none"
-        defaultValue={maxValue}
-        borderRadius="full"
-        isReadOnly
-      >
-        <SliderTrack
-          borderRadius="full"
-          h="10px"
-          bgGradient="linear(to-r, rgb(58, 110, 180) 0%, rgb(126, 212, 87) 20%, rgb(248, 212, 73) 40%, rgb(235, 77, 96) 60%, rgb(180, 96, 231) 80%, rgb(178, 34, 34) 100%)"
-        >
-          <SliderFilledTrack />
-        </SliderTrack>
-        <SliderThumb bgColor="black" borderColor="white" />
-      </Slider>
-      <Text fontSize="18px" fontWeight="bold">
-        {value}
-      </Text>
+      {isLoading ? (
+        <Flex w="full" h="full" justify="center" align="center">
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="lg"
+          />
+        </Flex>
+      ) : (
+        <>
+          <Flex mt="3">
+            <Text fontWeight="bold" fontSize="xl" color="#525252">
+              {title}
+            </Text>
+          </Flex>
+          <Slider
+            min={minValue}
+            max={maxValue}
+            value={value}
+            aria-label={`slider-${title.replace(/\s/g, "-").toLowerCase()}`}
+            colorScheme="none"
+            defaultValue={maxValue}
+            borderRadius="full"
+            isReadOnly
+          >
+            <SliderTrack
+              borderRadius="full"
+              h="10px"
+              bgGradient="linear(to-r, rgb(58, 110, 180) 0%, rgb(126, 212, 87) 20%, rgb(248, 212, 73) 40%, rgb(235, 77, 96) 60%, rgb(180, 96, 231) 80%, rgb(178, 34, 34) 100%)"
+            >
+              <SliderFilledTrack />
+            </SliderTrack>
+            <SliderThumb bgColor="black" borderColor="white" />
+          </Slider>
+          <Text fontSize="18px" fontWeight="bold">
+            {value}
+          </Text>
+        </>
+      )}
     </Flex>
   );
 };

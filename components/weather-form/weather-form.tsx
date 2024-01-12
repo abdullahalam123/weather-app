@@ -18,6 +18,7 @@ import { IoSearchOutline } from "react-icons/io5";
 interface WeatherFormProps {
   setWeatherData: React.Dispatch<React.SetStateAction<any>>;
   setMoreWeatherData: React.Dispatch<React.SetStateAction<any>>;
+  setParentLoading: React.Dispatch<React.SetStateAction<any>>;
 }
 
 interface AddressSuggestion {
@@ -29,9 +30,12 @@ interface AddressSuggestion {
 export const WeatherForm = ({
   setWeatherData,
   setMoreWeatherData,
+  setParentLoading,
 }: WeatherFormProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [city, setCity] = useState("Assam");
+  const [city, setCity] = useState<string>(() => {
+    return localStorage.getItem("lastSearchedCity") || "Assam";
+  });
   const [isCelsius, setIsCelsius] = useState(false);
   const [unit, setUnit] = useState("metric"); // Use metric for Celsius and imperial for Fahrenheit
   const [isLoading, setIsLoading] = useState(false);
@@ -68,6 +72,7 @@ export const WeatherForm = ({
 
   const fetchData = async () => {
     setIsLoading(true);
+    setParentLoading(true);
     try {
       const result = await axios.get(
         `https://api.weatherapi.com/v1/current.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${city}&aqi=yes`
@@ -78,10 +83,16 @@ export const WeatherForm = ({
 
       setWeatherData(response.data);
       setMoreWeatherData(result.data);
+
+      // Save the searched city to local storage
+      localStorage.setItem("lastSearchedCity", city);
+
       setIsLoading(false);
+      setParentLoading(false);
       onClose();
     } catch (error) {
       setIsLoading(false);
+      setParentLoading(false);
       onClose();
       console.error("Error fetching weather data:", error);
     }
@@ -106,7 +117,17 @@ export const WeatherForm = ({
     setIsLoading(false);
   }, [isCelsius]);
 
+  useEffect(() => {
+    // Retrieve the last searched city from local storage
+    const lastSearchedCity = localStorage.getItem("lastSearchedCity");
+
+    if (lastSearchedCity) {
+      setCity(lastSearchedCity);
+    }
+  }, []);
+
   const handleSuggestionClick = (selectedCity: string) => {
+    localStorage.setItem("lastSearchedCity", selectedCity);
     setCity(selectedCity);
     fetchData();
     onClose();

@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Image, Text } from "@chakra-ui/react";
+import { Flex, Image, Spinner, Text } from "@chakra-ui/react";
 import { convertUnixTimestampToDateTime } from "@/constants";
 import { AirQualitySlider } from "..";
 import { MoreWeatherData, WeatherData } from "@/interfaces";
@@ -7,11 +7,13 @@ import { MoreWeatherData, WeatherData } from "@/interfaces";
 interface WeatherAdditionalInfoBoxProps {
   weatherDataMore: MoreWeatherData;
   weatherData: WeatherData;
+  isLoading: boolean;
 }
 
 const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
   weatherData,
   weatherDataMore,
+  isLoading,
 }) => {
   return (
     <Flex ml="10" mt="10" w="450px" gap="6" direction="column">
@@ -26,44 +28,59 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
           px="4"
           gap="5"
         >
-          <Flex mt="3" justifyContent="space-between">
-            <Flex direction="column">
-              <Image
-                src="lib/images/sunrise.png"
-                alt="sunrise"
-                w="64px"
-                h="64px"
+          {isLoading ? (
+            <Flex w="full" h="full" justify="center" align="center">
+              <Spinner
+                thickness="4px"
+                speed="0.65s"
+                emptyColor="gray.200"
+                color="blue.500"
+                size="lg"
               />
-              <Text fontWeight="bold" fontSize="xl" color="#525252">
-                Sunrise
-              </Text>
-              <Text>
-                {convertUnixTimestampToDateTime(
-                  weatherData?.sys?.sunrise as number
-                )}
-              </Text>
             </Flex>
-            <Flex direction="column">
-              <Image
-                src="lib/images/sunset.png"
-                alt="sunseet"
-                w="64px"
-                h="64px"
-              />
-              <Text fontWeight="bold" fontSize="xl" color="#525252">
-                Sunset
-              </Text>
-              <Text>
-                {convertUnixTimestampToDateTime(
-                  weatherData?.sys?.sunset as number
-                )}
-              </Text>
-            </Flex>
-          </Flex>
+          ) : (
+            <>
+              <Flex mt="3" justifyContent="space-between">
+                <Flex direction="column">
+                  <Image
+                    src="lib/images/sunrise.png"
+                    alt="sunrise"
+                    w="64px"
+                    h="64px"
+                  />
+                  <Text fontWeight="bold" fontSize="xl" color="#525252">
+                    Sunrise
+                  </Text>
+                  <Text>
+                    {convertUnixTimestampToDateTime(
+                      weatherData?.sys?.sunrise as number
+                    )}
+                  </Text>
+                </Flex>
+                <Flex direction="column">
+                  <Image
+                    src="lib/images/sunset.png"
+                    alt="sunseet"
+                    w="64px"
+                    h="64px"
+                  />
+                  <Text fontWeight="bold" fontSize="xl" color="#525252">
+                    Sunset
+                  </Text>
+                  <Text>
+                    {convertUnixTimestampToDateTime(
+                      weatherData?.sys?.sunset as number
+                    )}
+                  </Text>
+                </Flex>
+              </Flex>
+            </>
+          )}
         </Flex>
 
         {/* UV INDEX */}
         <AirQualitySlider
+          isLoading={isLoading}
           title="UV Index"
           minValue={1}
           maxValue={10}
@@ -74,6 +91,7 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
       {/* AIR POLLUTION */}
       <Flex>
         <AirQualitySlider
+          isLoading={isLoading}
           title="Air Pollution"
           minValue={1}
           maxValue={10}

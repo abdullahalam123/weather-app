@@ -1,4 +1,4 @@
-import { Flex, Image, Text } from "@chakra-ui/react";
+import { Flex, Image, Spinner, Text } from "@chakra-ui/react";
 import React from "react";
 
 interface WeatherInfoProps {
@@ -6,6 +6,7 @@ interface WeatherInfoProps {
   label: string;
   value: string | number | undefined;
   symbol: string;
+  isLoading: boolean;
 }
 
 export const WeatherInfo: React.FC<WeatherInfoProps> = ({
@@ -13,6 +14,7 @@ export const WeatherInfo: React.FC<WeatherInfoProps> = ({
   label,
   value,
   symbol,
+  isLoading,
 }) => {
   return (
     <Flex
@@ -26,14 +28,28 @@ export const WeatherInfo: React.FC<WeatherInfoProps> = ({
       justifyContent="center"
       align="center"
     >
-      <Flex justify="center" align="center">
-        <Image src={iconSrc} w="16px" h="16px" alt={label} />
-        <Text>{label}</Text>
-      </Flex>
-      <Text fontSize="32px" fontWeight="bold">
-        {value}
-        {symbol}
-      </Text>
+      {isLoading ? (
+        <Flex w="full" h="full" justify="center" align="center">
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="lg"
+          />
+        </Flex>
+      ) : (
+        <>
+          <Flex justify="center" align="center">
+            <Image src={iconSrc} w="16px" h="16px" alt={label} />
+            <Text>{label}</Text>
+          </Flex>
+          <Text fontSize="32px" fontWeight="bold">
+            {value}
+            {symbol}
+          </Text>
+        </>
+      )}
     </Flex>
   );
 };
