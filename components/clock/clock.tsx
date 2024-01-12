@@ -1,7 +1,7 @@
 import { Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-const Clock = () => {
+export const Clock = () => {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -23,5 +23,3 @@ const Clock = () => {
     >{`${hours}:${minutes}:${seconds}`}</Text>
   );
 };
-
-export default Clock;

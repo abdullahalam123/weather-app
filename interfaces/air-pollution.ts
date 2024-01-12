@@ -24,9 +24,7 @@ interface List {
   dt: number;
 }
 
-interface AirPollutionData {
+export interface AirPollutionData {
   coord: Coord;
   list: List[];
 }
-
-export default AirPollutionData;

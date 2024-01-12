@@ -6,7 +6,9 @@ interface WeatherDisplayProps {
   weatherData: WeatherForecast;
 }
 
-const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ weatherData }) => {
+export const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
+  weatherData,
+}) => {
   // Check if weatherData is undefined or null
   if (!weatherData) {
     return (
@@ -84,5 +86,3 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ weatherData }) => {
     </Flex>
   );
 };
-
-export default WeatherDisplay;

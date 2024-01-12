@@ -1,20 +1,28 @@
 "use client";
-import WeatherForm from "@/components/weather-form/weather-form";
-import { weatherImageMapping } from "@/constants/image-map";
-import WeatherData from "@/interfaces/weather-data";
-import { Box, Divider, Flex, Image, Text } from "@chakra-ui/react";
+import { Flex, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-import AirQualitySlider from "@/components/air-quality-slider/air-quality-slider";
-import Clock from "@/components/clock/clock";
-import WeatherInfo from "@/components/weather-info/weather-info";
-import { capitalizeFirstLetter } from "@/constants/capitalize-letters";
-import { daysOfWeek } from "@/constants/days";
-import AirPollutionData from "@/interfaces/air-pollution";
-import { MoreWeatherData } from "@/interfaces/weather-data-more";
-import { WeatherForecast } from "@/interfaces/weather-forecast";
-import WeatherDisplay from "@/components/forecast/forecast";
+import {
+  AirQualitySlider,
+  Clock,
+  WeatherDisplay,
+  WeatherForm,
+  WeatherInfo,
+} from "../components";
+
+import {
+  capitalizeFirstLetter,
+  daysOfWeek,
+  weatherImageMapping,
+} from "../constants";
+
+import {
+  MoreWeatherData,
+  WeatherForecast,
+  AirPollutionData,
+  WeatherData,
+} from "../interfaces";
 
 export default function Home() {
   const today = new Date();
@@ -175,7 +183,7 @@ export default function Home() {
               </Flex>
             </Flex>
           </Flex>
-          <Flex>
+          <Flex mb="10">
             {/* 5 day forecast*/}
             <WeatherDisplay weatherData={forecastData as WeatherForecast} />
           </Flex>
@@ -193,7 +201,7 @@ export default function Home() {
               iconSrc="lib/images/humidity.png"
               label="Humidity"
               value={moreWeatherData?.current.humidity}
-              symbol="°"
+              symbol="%"
             />
           </Flex>
           <Flex>

@@ -8,7 +8,7 @@ interface WeatherInfoProps {
   symbol: string;
 }
 
-const WeatherInfo: React.FC<WeatherInfoProps> = ({
+export const WeatherInfo: React.FC<WeatherInfoProps> = ({
   iconSrc,
   label,
   value,
@@ -37,5 +37,3 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
     </Flex>
   );
 };
-
-export default WeatherInfo;

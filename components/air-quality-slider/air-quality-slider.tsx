@@ -15,7 +15,7 @@ interface AirQualitySliderProps {
   value: number;
 }
 
-const AirQualitySlider: React.FC<AirQualitySliderProps> = ({
+export const AirQualitySlider: React.FC<AirQualitySliderProps> = ({
   title,
   minValue,
   maxValue,
@@ -61,5 +61,3 @@ const AirQualitySlider: React.FC<AirQualitySliderProps> = ({
     </Flex>
   );
 };
-
-export default AirQualitySlider;

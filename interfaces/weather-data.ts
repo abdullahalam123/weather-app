@@ -39,7 +39,7 @@ interface Sys {
   sunset: number;
 }
 
-interface WeatherData {
+export interface WeatherData {
   coord: Coordinates;
   weather: Weather[];
   base: string;
@@ -54,5 +54,3 @@ interface WeatherData {
   name: string;
   cod: number;
 }
-
-export default WeatherData;
