@@ -34,7 +34,11 @@ export const WeatherForm = ({
 }: WeatherFormProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [city, setCity] = useState<string>(() => {
-    return localStorage.getItem("lastSearchedCity") || "Assam";
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("lastSearchedCity") || "Assam";
+    } else {
+      return "Assam";
+    }
   });
   const [isCelsius, setIsCelsius] = useState(false);
   const [unit, setUnit] = useState("metric"); // Use metric for Celsius and imperial for Fahrenheit
