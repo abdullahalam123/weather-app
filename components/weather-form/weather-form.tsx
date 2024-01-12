@@ -164,7 +164,11 @@ export const WeatherForm = ({
                       _hover={{
                         bg: "#f5f5f5",
                       }}
-                      onClick={() => handleSuggestionClick(address.name)}
+                      onClick={() =>
+                        handleSuggestionClick(
+                          `${address.name}, ${address.region}`
+                        )
+                      }
                     >
                       <Text>
                         {`${address.name}, ${address.region}, ${address.country}`}
