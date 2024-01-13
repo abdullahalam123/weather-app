@@ -17,11 +17,10 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
 }) => {
   return (
     <Flex
-      // border="1px"
       ml={{ md: "10" }}
       mt="10"
       gap="6"
-      w={{ base: "fit-content", md: "28.125rem" }}
+      w={{ base: "95%", md: "28.125rem" }}
       direction="column"
     >
       <Flex gap={{ base: "4", md: "10" }}>
@@ -63,7 +62,10 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
                   >
                     Sunrise
                   </Text>
-                  <Text fontWeight={{ base: "semibold" }}>
+                  <Text
+                    fontSize={{ base: "14px", md: "16px" }}
+                    fontWeight={{ base: "semibold" }}
+                  >
                     {forecastData?.forecast.forecastday[0].astro.sunrise}
                   </Text>
                 </Flex>
@@ -81,7 +83,10 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
                   >
                     Sunset
                   </Text>
-                  <Text fontWeight={{ base: "semibold" }}>
+                  <Text
+                    fontSize={{ base: "14px", md: "16px" }}
+                    fontWeight={{ base: "semibold" }}
+                  >
                     {forecastData?.forecast.forecastday[0].astro.sunset}
                   </Text>
                 </Flex>

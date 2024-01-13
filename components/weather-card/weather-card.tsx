@@ -1,15 +1,18 @@
 // WeatherDisplayBox.tsx
-import { Flex, Image, Spinner, Text } from "@chakra-ui/react";
-import React from "react";
+import { Flex, Image, Spinner, Switch, Text } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { capitalizeFirstLetter, daysOfWeek } from "../../constants";
 
 import { Clock } from "..";
 import { MoreWeatherData, WeatherForecast } from "../../interfaces";
+import { CiLocationArrow1 } from "react-icons/ci";
 interface WeatherCardProps {
   today: Date;
   forecastData: WeatherForecast | undefined;
   moreWeatherData: MoreWeatherData | undefined;
   isLoading: boolean;
+  setParentCelsius: React.Dispatch<React.SetStateAction<any>>;
+  setParentFahrenheit: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export const WeatherCard: React.FC<WeatherCardProps> = ({
@@ -17,8 +20,9 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({
   forecastData,
   moreWeatherData,
   isLoading,
+  setParentCelsius,
+  setParentFahrenheit,
 }) => {
-  // Check if weatherData is undefined or null
   if (!forecastData) {
     return (
       <Flex
@@ -45,6 +49,8 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({
   }
 
   const { location, current, forecast } = forecastData;
+  const [isCelsius, setIsCelsius] = useState(true);
+  const [isFahrenheit, setIsFahrenheit] = useState(false);
 
   return (
     <Flex
@@ -77,7 +83,14 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({
           </Flex>
 
           {/* City name */}
-          <Text px="6" mt="4" fontSize="1.125rem" fontWeight="bold">
+          <Text
+            px="6"
+            mt="4"
+            fontSize="1.125rem"
+            fontWeight="bold"
+            display="flex"
+          >
+            <CiLocationArrow1 width="16px" height="16px" />
             {forecastData?.location.name}
           </Text>
 
@@ -91,8 +104,41 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({
                 fontSize="4rem"
                 fontWeight="bold"
               >
-                {moreWeatherData?.current.temp_c.toFixed(0)}°
+                {isCelsius
+                  ? moreWeatherData?.current.temp_c.toFixed(0)
+                  : isFahrenheit
+                  ? moreWeatherData?.current.temp_f.toFixed(0)
+                  : null}
+                °
               </Text>
+              <Flex fontSize="18px" direction="column">
+                <Text
+                  onClick={() => {
+                    setIsFahrenheit(false);
+                    setParentFahrenheit(false);
+
+                    setIsCelsius(true);
+                    setParentCelsius(true);
+                  }}
+                  cursor="pointer"
+                  fontWeight={isCelsius ? "bold" : "light"}
+                >
+                  C
+                </Text>
+                <Text
+                  onClick={() => {
+                    setIsCelsius(false);
+                    setParentCelsius(false);
+
+                    setIsFahrenheit(true);
+                    setParentFahrenheit(true);
+                  }}
+                  cursor="pointer"
+                  fontWeight={isFahrenheit ? "bold" : "light"}
+                >
+                  F
+                </Text>
+              </Flex>
             </Flex>
 
             <Flex px="6" w="full" justifyContent="space-between">
@@ -114,14 +160,20 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({
                 </Text>
                 <Text>
                   H:{" "}
-                  {forecastData?.forecast.forecastday[0].day.maxtemp_c.toFixed(
-                    0
-                  )}
+                  {(isCelsius
+                    ? forecastData.forecast.forecastday[0].day.maxtemp_c
+                    : isFahrenheit
+                    ? forecastData.forecast.forecastday[0].day.maxtemp_f
+                    : null
+                  )?.toFixed(0)}
                   ° L:{" "}
-                  {forecastData?.forecast.forecastday[0].day.mintemp_c.toFixed(
-                    0
-                  )}
-                  °{" "}
+                  {(isCelsius
+                    ? forecastData?.forecast.forecastday[0].day.mintemp_c
+                    : isFahrenheit
+                    ? forecastData?.forecast.forecastday[0].day.mintemp_f
+                    : null
+                  )?.toFixed(0)}
+                  °
                 </Text>
               </Flex>
               {/* feels like */}
@@ -136,7 +188,10 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({
                   <Text fontWeight="semibold">Feels like</Text>
                 </Flex>
                 <Text textAlign="right">
-                  {moreWeatherData?.current.feelslike_c.toFixed(0)}°
+                  {isCelsius && moreWeatherData?.current.feelslike_c.toFixed(0)}
+                  {isFahrenheit &&
+                    moreWeatherData?.current.feelslike_f.toFixed(0)}
+                  °
                 </Text>
               </Flex>
             </Flex>

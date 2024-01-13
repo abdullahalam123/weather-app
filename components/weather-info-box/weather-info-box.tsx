@@ -1,8 +1,7 @@
-// WeatherInfoBox.tsx
-import React from "react";
-import { Flex, Spinner } from "@chakra-ui/react";
-import { WeatherInfo } from "..";
 import { MoreWeatherData } from "@/interfaces";
+import { Flex } from "@chakra-ui/react";
+import React from "react";
+import { WeatherInfo } from "..";
 
 interface WeatherInfoBoxProps {
   moreWeatherData: MoreWeatherData;
@@ -44,7 +43,7 @@ export const WeatherInfoBox: React.FC<WeatherInfoBoxProps> = ({
           iconSrc="lib/images/wind.png"
           label="Wind"
           value={moreWeatherData?.current.wind_kph}
-          symbol="kp/h"
+          symbol="km/h"
         />
       </Flex>
     </>

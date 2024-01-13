@@ -5,7 +5,7 @@ import { Providers } from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Weather App",
+  title: "Weatherio - Weather App",
   description: "A simple weather dashboard",
 };
 

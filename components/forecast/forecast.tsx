@@ -5,11 +5,15 @@ import { WeatherForecast } from "@/interfaces/weather-forecast";
 interface WeatherDisplayProps {
   weatherData: WeatherForecast;
   isLoading: boolean;
+  isCelsius: boolean;
+  isFahrenheit: boolean;
 }
 
 export const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
   weatherData,
   isLoading,
+  isCelsius,
+  isFahrenheit,
 }) => {
   // Check if weatherData is undefined or null
   if (!weatherData) {
@@ -99,8 +103,15 @@ export const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
                 </Flex>
 
                 <Text>
-                  {day.day.maxtemp_c.toFixed(0)}° {day.day.mintemp_c.toFixed(0)}
-                  °
+                  {isCelsius
+                    ? `${day.day.maxtemp_c.toFixed(
+                        0
+                      )}° ${day.day.mintemp_c.toFixed(0)}°`
+                    : isFahrenheit
+                    ? `${day.day.maxtemp_f.toFixed(
+                        0
+                      )}° ${day.day.mintemp_f.toFixed(0)}°`
+                    : "Temperature unit not specified"}
                 </Text>
               </Flex>
               {index < forecast.forecastday.length - 1 && <Divider mt="2" />}

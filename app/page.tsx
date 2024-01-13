@@ -1,5 +1,5 @@
 "use client";
-import { Flex, Image } from "@chakra-ui/react";
+import { Flex, Image, Switch, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -17,6 +17,9 @@ export default function Home() {
   const today = new Date();
   const [moreWeatherData, setMoreWeatherData] = useState<MoreWeatherData>();
   const [forecastData, setForecastData] = useState<WeatherForecast>();
+
+  const [isCelsius, setIsCelsius] = useState(true);
+  const [isFahrenheit, setIsFahrenheit] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -74,20 +77,22 @@ export default function Home() {
       <Flex w="full" justify="center" flexWrap="wrap">
         <Flex direction="column" gap="2">
           <WeatherCard
+            setParentCelsius={setIsCelsius}
+            setParentFahrenheit={setIsFahrenheit}
             isLoading={isLoading}
             moreWeatherData={moreWeatherData}
             today={today}
             forecastData={forecastData as WeatherForecast}
           />
-
           <Flex mb="10">
             <WeatherDisplay
+              isCelsius={isCelsius}
+              isFahrenheit={isFahrenheit}
               isLoading={isLoading}
               weatherData={forecastData as WeatherForecast}
             />
           </Flex>
         </Flex>
-
         <Flex
           align={{ base: "center", md: "none" }}
           h="26.875rem"
