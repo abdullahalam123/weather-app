@@ -9,14 +9,15 @@ import {
   ModalContent,
   ModalOverlay,
   Text,
+  Toast,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 
 interface WeatherFormProps {
-  setWeatherData: React.Dispatch<React.SetStateAction<any>>;
   setMoreWeatherData: React.Dispatch<React.SetStateAction<any>>;
   setParentLoading: React.Dispatch<React.SetStateAction<any>>;
 }
@@ -27,12 +28,20 @@ interface AddressSuggestion {
   country: string;
 }
 
+interface ErrorResponse {
+  error: {
+    code: number;
+    message: string;
+  };
+}
+
 export const WeatherForm = ({
-  setWeatherData,
   setMoreWeatherData,
   setParentLoading,
 }: WeatherFormProps) => {
+  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const [city, setCity] = useState<string>(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("lastSearchedCity") || "Assam";
@@ -97,6 +106,16 @@ export const WeatherForm = ({
       setParentLoading(false);
       onClose();
       console.error("Error fetching normal weather data:", error);
+
+      toast({
+        title: "Error!",
+        description: (error as AxiosError<ErrorResponse>)?.response?.data?.error
+          ?.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
     }
   };
 
@@ -176,7 +195,7 @@ export const WeatherForm = ({
                   />
                 </InputGroup>
 
-                <Box overflowY="scroll" h="150px" w="full">
+                <Box overflowY="scroll" h="9.375rem" w="full">
                   <Text>Suggestions</Text>
                   {suggestedAddresses.map((address) => (
                     <Box

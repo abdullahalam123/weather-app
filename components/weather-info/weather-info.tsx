@@ -18,12 +18,13 @@ export const WeatherInfo: React.FC<WeatherInfoProps> = ({
 }) => {
   return (
     <Flex
-      borderRadius="18px"
+      boxShadow="lg"
+      borderRadius="1.125rem"
       border="1px solid #e5e5e5"
       mt="10"
       ml="10"
-      w="200px"
-      h="192px"
+      w="12.5rem"
+      h="12rem"
       direction="column"
       justifyContent="center"
       align="center"
@@ -31,7 +32,7 @@ export const WeatherInfo: React.FC<WeatherInfoProps> = ({
       {isLoading ? (
         <Flex w="full" h="full" justify="center" align="center">
           <Spinner
-            thickness="4px"
+            thickness="0.25rem"
             speed="0.65s"
             emptyColor="gray.200"
             color="blue.500"
@@ -40,11 +41,11 @@ export const WeatherInfo: React.FC<WeatherInfoProps> = ({
         </Flex>
       ) : (
         <>
-          <Flex justify="center" align="center">
-            <Image src={iconSrc} w="16px" h="16px" alt={label} />
-            <Text>{label}</Text>
+          <Flex gap="1" justify="center" align="center">
+            <Image src={iconSrc} w="1rem" h="1rem" alt={label} />
+            <Text fontSize="1.125rem">{label}</Text>
           </Flex>
-          <Text fontSize="32px" fontWeight="bold">
+          <Text fontSize="2rem" fontWeight="bold">
             {value}
             {symbol}
           </Text>

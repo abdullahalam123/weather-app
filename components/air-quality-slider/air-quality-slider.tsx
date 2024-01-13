@@ -31,8 +31,9 @@ export const AirQualitySlider: React.FC<AirQualitySliderProps> = ({
 }) => {
   return (
     <Flex
+      boxShadow="lg"
       w="full"
-      h="200px"
+      h="12.5rem"
       borderRadius="0.75rem"
       border="1px solid #e5e5e5"
       direction="column"
@@ -42,7 +43,7 @@ export const AirQualitySlider: React.FC<AirQualitySliderProps> = ({
       {isLoading ? (
         <Flex w="full" h="full" justify="center" align="center">
           <Spinner
-            thickness="4px"
+            thickness="0.25rem"
             speed="0.65s"
             emptyColor="gray.200"
             color="blue.500"
@@ -69,14 +70,14 @@ export const AirQualitySlider: React.FC<AirQualitySliderProps> = ({
           >
             <SliderTrack
               borderRadius="full"
-              h="10px"
+              h="0.625rem"
               bgGradient="linear(to-r, rgb(58, 110, 180) 0%, rgb(126, 212, 87) 20%, rgb(248, 212, 73) 40%, rgb(235, 77, 96) 60%, rgb(180, 96, 231) 80%, rgb(178, 34, 34) 100%)"
             >
               <SliderFilledTrack />
             </SliderTrack>
             <SliderThumb bgColor="black" borderColor="white" />
           </Slider>
-          <Text fontSize="18px" fontWeight="bold">
+          <Text fontSize="1.125rem" fontWeight="bold">
             {value}
           </Text>
         </>

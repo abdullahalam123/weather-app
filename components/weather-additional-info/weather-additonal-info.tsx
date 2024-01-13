@@ -16,12 +16,13 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
   isLoading,
 }) => {
   return (
-    <Flex ml="10" mt="10" w="450px" gap="6" direction="column">
+    <Flex ml="10" mt="10" w="28.125rem" gap="6" direction="column">
       <Flex gap="10">
         {/* SUNRISE AND SUNSET */}
         <Flex
+          boxShadow="lg"
           w="full"
-          h="200px"
+          h="12.5rem"
           borderRadius="0.75rem"
           border="1px solid #e5e5e5"
           direction="column"
@@ -31,7 +32,7 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
           {isLoading ? (
             <Flex w="full" h="full" justify="center" align="center">
               <Spinner
-                thickness="4px"
+                thickness="0.25rem"
                 speed="0.65s"
                 emptyColor="gray.200"
                 color="blue.500"
@@ -45,8 +46,8 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
                   <Image
                     src="lib/images/sunrise.png"
                     alt="sunrise"
-                    w="64px"
-                    h="64px"
+                    w="4rem"
+                    h="4rem"
                   />
                   <Text fontWeight="bold" fontSize="xl" color="#525252">
                     Sunrise
@@ -59,8 +60,8 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
                   <Image
                     src="lib/images/sunset.png"
                     alt="sunseet"
-                    w="64px"
-                    h="64px"
+                    w="4rem"
+                    h="4rem"
                   />
                   <Text fontWeight="bold" fontSize="xl" color="#525252">
                     Sunset
@@ -87,7 +88,7 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
       </Flex>
 
       {/* AIR POLLUTION */}
-      <Flex>
+      <Flex mt="1">
         <AirQualitySlider
           imageTag="Air Pollution"
           imageSource="lib/images/air-pollution.png"

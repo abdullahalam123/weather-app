@@ -1,11 +1,7 @@
 // WeatherDisplayBox.tsx
 import { Flex, Image, Spinner, Text } from "@chakra-ui/react";
 import React from "react";
-import {
-  capitalizeFirstLetter,
-  daysOfWeek,
-  weatherImageMapping,
-} from "../../constants";
+import { capitalizeFirstLetter, daysOfWeek } from "../../constants";
 
 import { Clock } from "..";
 import { MoreWeatherData, WeatherForecast } from "../../interfaces";
@@ -29,16 +25,16 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({
         p="4"
         mt="10"
         borderRadius="0.75rem"
-        border="1px solid #e5e5e5"
+        border="0.0625rem solid #e5e5e5"
         direction="column"
-        w="370px"
-        h="430px"
+        w="23.125rem"
+        h="26.875rem"
         boxShadow="lg"
         justify="center"
         align="center"
       >
         <Spinner
-          thickness="4px"
+          thickness="0.25rem"
           speed="0.65s"
           emptyColor="gray.200"
           color="blue.500"
@@ -56,14 +52,14 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({
       borderRadius="0.75rem"
       border="1px solid #e5e5e5"
       direction="column"
-      w="370px"
-      h="430px"
-      boxShadow="sm"
+      w="23.125rem"
+      h="26.5625rem"
+      boxShadow="lg"
     >
       {isLoading ? (
         <Flex w="full" h="full" justify="center" align="center">
           <Spinner
-            thickness="4px"
+            thickness="0.25rem"
             speed="0.65s"
             emptyColor="gray.200"
             color="blue.500"
@@ -74,14 +70,14 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({
         <>
           {/* day and time */}
           <Flex mt="4" justifyContent="space-between" px="6">
-            <Text fontSize="18px" fontWeight="semibold">
+            <Text fontSize="1.125rem" fontWeight="semibold">
               {daysOfWeek[today.getDay()]}
             </Text>
             <Clock />
           </Flex>
 
           {/* City name */}
-          <Text px="6" mt="4" fontSize="18px" fontWeight="bold">
+          <Text px="6" mt="4" fontSize="1.125rem" fontWeight="bold">
             {forecastData?.location.name}
           </Text>
 
@@ -90,9 +86,9 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({
             <Flex mt="10" w="full" justify="center" align="center">
               <Text
                 p="2"
-                border="1px"
+                border="0.0625rem"
                 borderRadius="full"
-                fontSize="64px"
+                fontSize="4rem"
                 fontWeight="bold"
               >
                 {moreWeatherData?.current.temp_c.toFixed(0)}°
@@ -134,8 +130,8 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({
                   <Image
                     src="lib/images/thermometer.png"
                     alt="Thermometer"
-                    w="16px"
-                    h="16px"
+                    w="1rem"
+                    h="1rem"
                   />
                   <Text fontWeight="semibold">Feels like</Text>
                 </Flex>

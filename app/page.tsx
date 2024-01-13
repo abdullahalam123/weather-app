@@ -11,11 +11,10 @@ import {
 } from "../components";
 
 import WeatherAdditionalInfoBox from "@/components/weather-additional-info/weather-additonal-info";
-import { MoreWeatherData, WeatherData, WeatherForecast } from "../interfaces";
+import { MoreWeatherData, WeatherForecast } from "../interfaces";
 
 export default function Home() {
   const today = new Date();
-  const [weatherData, setWeatherData] = useState<WeatherData>();
   const [moreWeatherData, setMoreWeatherData] = useState<MoreWeatherData>();
   const [forecastData, setForecastData] = useState<WeatherForecast>();
 
@@ -43,13 +42,12 @@ export default function Home() {
 
   return (
     <Flex minH="100vh" w="100%" direction="column" flexWrap="wrap">
-      <Flex mt="10" w="full" h="50px" justify="space-between" px="20">
-        <Image src="lib/images/sun.png" w="42px" h="42px" alt="logo" />
+      <Flex mt="10" w="full" h="3.125rem" justify="space-between" px="20">
+        <Image src="lib/images/sun.png" w="2.625rem" h="2.625rem" alt="logo" />
 
-        <Flex w="300px">
+        <Flex w="18.75rem">
           <WeatherForm
             setParentLoading={setIsLoading}
-            setWeatherData={setWeatherData}
             setMoreWeatherData={setMoreWeatherData}
           />
         </Flex>
@@ -57,7 +55,6 @@ export default function Home() {
 
       <Flex w="full" justify="center" flexWrap="wrap">
         <Flex direction="column" gap="2">
-          {/* DONE */}
           <WeatherCard
             isLoading={isLoading}
             moreWeatherData={moreWeatherData}
@@ -66,7 +63,6 @@ export default function Home() {
           />
 
           <Flex mb="10">
-            {/* DONE */}
             <WeatherDisplay
               isLoading={isLoading}
               weatherData={forecastData as WeatherForecast}
@@ -74,7 +70,7 @@ export default function Home() {
           </Flex>
         </Flex>
 
-        <Flex h="430px" direction="column">
+        <Flex h="26.875rem" direction="column">
           <WeatherInfoBox
             isLoading={isLoading}
             moreWeatherData={moreWeatherData as MoreWeatherData}

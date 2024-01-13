@@ -20,14 +20,14 @@ export const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
         borderRadius="0.75rem"
         border="1px solid #e5e5e5"
         direction="column"
-        w="370px"
-        h="430px"
+        w="23.125rem"
+        h="26.875rem"
         boxShadow="lg"
         justify="center"
         align="center"
       >
         <Spinner
-          thickness="4px"
+          thickness="0.25rem"
           speed="0.65s"
           emptyColor="gray.200"
           color="blue.500"
@@ -42,18 +42,18 @@ export const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
   return (
     <Flex
       p="4"
-      mt="10"
+      mt="8"
       borderRadius="0.75rem"
       border="1px solid #e5e5e5"
       direction="column"
-      w="370px"
-      h="430px"
+      w="23.125rem"
+      h="26.875rem"
       boxShadow="lg"
     >
       {isLoading ? (
         <Flex w="full" h="full" justify="center" align="center">
           <Spinner
-            thickness="4px"
+            thickness="0.25rem"
             speed="0.65s"
             emptyColor="gray.200"
             color="blue.500"
@@ -66,7 +66,7 @@ export const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
             <Text fontSize="md" color="#525252" fontWeight="bold">
               7-Day Forecast
             </Text>
-            <Flex mr="2" justifyContent="space-between" w="40px">
+            <Flex mr="2" justifyContent="space-between" w="2.5rem">
               <Text>H</Text>
               <Text>L</Text>
             </Flex>
@@ -75,7 +75,7 @@ export const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
           {forecast.forecastday.map((day, index) => (
             <React.Fragment key={index}>
               <Flex alignItems="center" justify="space-between" mt="3">
-                <Flex w="150px" justify="space-between">
+                <Flex w="9.375rem" justify="space-between">
                   <Text fontWeight="bold">
                     {index === 0
                       ? "Today"
@@ -86,15 +86,15 @@ export const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
 
                   <Flex justify="center" align="center">
                     <Image
-                      w="32px"
-                      h="32px"
+                      w="2rem"
+                      h="2rem"
                       src={day.day.condition.icon}
                       alt="weather icon"
                     />
                   </Flex>
                 </Flex>
                 <Flex gap="1" align="center" justify="center">
-                  <Image src="lib/images/humidity.png" w="16px" h="16px" />
+                  <Image src="lib/images/humidity.png" w="1rem" h="1rem" />
                   <Text>{day.day.avghumidity}%</Text>
                 </Flex>
 
