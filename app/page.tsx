@@ -27,13 +27,14 @@ export default function Home() {
     const fetchForeCastData = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(
-          `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${moreWeatherData?.location.name}&days=7
+        if (moreWeatherData) {
+          const response = await axios.get(
+            `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${moreWeatherData?.location.name}&days=7
           `
-        );
-
-        setForecastData(response.data);
-        setIsLoading(false);
+          );
+          setForecastData(response.data);
+          setIsLoading(false);
+        }
       } catch (error) {
         setIsLoading(false);
         console.error("Error fetching forecast data for 7 days:", error);
