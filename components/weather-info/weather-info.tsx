@@ -22,8 +22,8 @@ export const WeatherInfo: React.FC<WeatherInfoProps> = ({
       borderRadius="1.125rem"
       border="1px solid #e5e5e5"
       mt="10"
-      ml="10"
-      w="12.5rem"
+      ml={{ base: "4", md: "10" }}
+      w={{ base: "10rem", md: "12.5rem" }}
       h="12rem"
       direction="column"
       justifyContent="center"
@@ -43,9 +43,9 @@ export const WeatherInfo: React.FC<WeatherInfoProps> = ({
         <>
           <Flex gap="1" justify="center" align="center">
             <Image src={iconSrc} w="1rem" h="1rem" alt={label} />
-            <Text fontSize="1.125rem">{label}</Text>
+            <Text fontSize="18px">{label}</Text>
           </Flex>
-          <Text fontSize="2rem" fontWeight="bold">
+          <Text fontSize={{ base: "1.125rem", md: "2rem" }} fontWeight="bold">
             {value}
             {symbol}
           </Text>

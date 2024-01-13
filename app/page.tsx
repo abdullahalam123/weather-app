@@ -41,11 +41,29 @@ export default function Home() {
   }, [moreWeatherData]);
 
   return (
-    <Flex minH="100vh" w="100%" direction="column" flexWrap="wrap">
-      <Flex mt="10" w="full" h="3.125rem" justify="space-between" px="20">
-        <Image src="lib/images/sun.png" w="2.625rem" h="2.625rem" alt="logo" />
+    <Flex
+      minH="100vh"
+      w="100%"
+      direction="column"
+      flexWrap="wrap"
+      overflowX={"hidden"}
+    >
+      <Flex
+        gap={{ base: "3", md: "none" }}
+        mt="10"
+        w="full"
+        h="3.125rem"
+        justify="space-between"
+      >
+        <Image
+          ml={{ base: "5", md: "10" }}
+          src="lib/images/sun.png"
+          w="2.625rem"
+          h="2.625rem"
+          alt="logo"
+        />
 
-        <Flex w="18.75rem">
+        <Flex w="18.75rem" mr="35">
           <WeatherForm
             setParentLoading={setIsLoading}
             setMoreWeatherData={setMoreWeatherData}
@@ -70,7 +88,11 @@ export default function Home() {
           </Flex>
         </Flex>
 
-        <Flex h="26.875rem" direction="column">
+        <Flex
+          align={{ base: "center", md: "none" }}
+          h="26.875rem"
+          direction="column"
+        >
           <WeatherInfoBox
             isLoading={isLoading}
             moreWeatherData={moreWeatherData as MoreWeatherData}

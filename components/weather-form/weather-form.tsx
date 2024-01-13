@@ -131,7 +131,6 @@ export const WeatherForm = ({
   }, [isCelsius, unit]);
 
   useEffect(() => {
-    // Update the unit based on the latest value of isCelsius
     setIsLoading(true);
 
     setUnit(isCelsius ? "metric" : "imperial");
@@ -139,7 +138,6 @@ export const WeatherForm = ({
   }, [isCelsius]);
 
   useEffect(() => {
-    // Retrieve the last searched city from local storage
     const lastSearchedCity = localStorage.getItem("lastSearchedCity");
 
     if (lastSearchedCity) {
@@ -160,7 +158,6 @@ export const WeatherForm = ({
         <InputLeftElement mt="1" pointerEvents="none">
           <IoSearchOutline />
         </InputLeftElement>
-        {/* Use Input element for search */}
         <Input
           isReadOnly
           size="lg"
@@ -185,7 +182,7 @@ export const WeatherForm = ({
                     <IoSearchOutline />
                   </InputLeftElement>
                   <Input
-                    w="25rem"
+                    w={{ base: "20rem", md: "25rem" }}
                     size="xl"
                     type="text"
                     placeholder="Enter city"
@@ -196,7 +193,7 @@ export const WeatherForm = ({
                 </InputGroup>
 
                 <Box overflowY="scroll" h="9.375rem" w="full">
-                  <Text>Suggestions</Text>
+                  <Text color="grey">Suggestions</Text>
                   {suggestedAddresses.map((address) => (
                     <Box
                       overflow="auto"
@@ -218,24 +215,6 @@ export const WeatherForm = ({
                     </Box>
                   ))}
                 </Box>
-                {/* <Button
-          color="white"
-          bg="black"
-          isLoading={isLoading}
-          type="submit"
-          ml="2"
-        >
-          Get Weather
-        </Button>
-        <Button
-          color="white"
-          bg="black"
-          isLoading={isLoading}
-          ml="2"
-          onClick={() => setIsCelsius((prev) => !prev)}
-        >
-          Change degrees
-        </Button> */}
               </form>
             </Flex>
           </ModalBody>

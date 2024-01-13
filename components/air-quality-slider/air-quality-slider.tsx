@@ -9,6 +9,7 @@ import {
   Image,
   Spinner,
 } from "@chakra-ui/react";
+import { generateAirPollutionMessage, generateUVMessage } from "@/constants";
 
 interface AirQualitySliderProps {
   title: string;
@@ -79,6 +80,12 @@ export const AirQualitySlider: React.FC<AirQualitySliderProps> = ({
           </Slider>
           <Text fontSize="1.125rem" fontWeight="bold">
             {value}
+          </Text>
+          <Text color="gray" fontSize={{ base: "10px", md: "14px" }}>
+            {title && title === "UV Index" && generateUVMessage(value)}
+            {title &&
+              title === "Air Pollution" &&
+              generateAirPollutionMessage(value)}
           </Text>
         </>
       )}

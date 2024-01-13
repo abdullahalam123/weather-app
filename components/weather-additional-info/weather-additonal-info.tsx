@@ -16,8 +16,15 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
   isLoading,
 }) => {
   return (
-    <Flex ml="10" mt="10" w="28.125rem" gap="6" direction="column">
-      <Flex gap="10">
+    <Flex
+      // border="1px"
+      ml={{ md: "10" }}
+      mt="10"
+      gap="6"
+      w={{ base: "fit-content", md: "28.125rem" }}
+      direction="column"
+    >
+      <Flex gap={{ base: "4", md: "10" }}>
         {/* SUNRISE AND SUNSET */}
         <Flex
           boxShadow="lg"
@@ -42,31 +49,39 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
           ) : (
             <>
               <Flex mt="3" justifyContent="space-between">
-                <Flex direction="column">
+                <Flex gap="2" direction="column">
                   <Image
                     src="lib/images/sunrise.png"
                     alt="sunrise"
-                    w="4rem"
-                    h="4rem"
+                    w={{ base: "3rem", md: "4rem" }}
+                    h={{ base: "3rem", md: "4rem" }}
                   />
-                  <Text fontWeight="bold" fontSize="xl" color="#525252">
+                  <Text
+                    fontWeight="bold"
+                    fontSize={{ base: "md", md: "xl" }}
+                    color="#525252"
+                  >
                     Sunrise
                   </Text>
-                  <Text>
+                  <Text fontWeight={{ base: "semibold" }}>
                     {forecastData?.forecast.forecastday[0].astro.sunrise}
                   </Text>
                 </Flex>
-                <Flex direction="column">
+                <Flex gap="2" direction="column">
                   <Image
                     src="lib/images/sunset.png"
                     alt="sunseet"
-                    w="4rem"
-                    h="4rem"
+                    w={{ base: "3rem", md: "4rem" }}
+                    h={{ base: "3rem", md: "4rem" }}
                   />
-                  <Text fontWeight="bold" fontSize="xl" color="#525252">
+                  <Text
+                    fontWeight="bold"
+                    fontSize={{ base: "md", md: "xl" }}
+                    color="#525252"
+                  >
                     Sunset
                   </Text>
-                  <Text>
+                  <Text fontWeight={{ base: "semibold" }}>
                     {forecastData?.forecast.forecastday[0].astro.sunset}
                   </Text>
                 </Flex>
@@ -88,7 +103,7 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
       </Flex>
 
       {/* AIR POLLUTION */}
-      <Flex mt="1">
+      <Flex mt="1" mb={{ base: "4", md: "none" }}>
         <AirQualitySlider
           imageTag="Air Pollution"
           imageSource="lib/images/air-pollution.png"
