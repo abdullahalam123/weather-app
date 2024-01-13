@@ -6,6 +6,7 @@ import {
   SliderFilledTrack,
   SliderThumb,
   Text,
+  Image,
   Spinner,
 } from "@chakra-ui/react";
 
@@ -15,6 +16,8 @@ interface AirQualitySliderProps {
   maxValue: number;
   value: number;
   isLoading: boolean;
+  imageSource: string;
+  imageTag: string;
 }
 
 export const AirQualitySlider: React.FC<AirQualitySliderProps> = ({
@@ -23,6 +26,8 @@ export const AirQualitySlider: React.FC<AirQualitySliderProps> = ({
   maxValue,
   value,
   isLoading,
+  imageSource,
+  imageTag,
 }) => {
   return (
     <Flex
@@ -46,7 +51,8 @@ export const AirQualitySlider: React.FC<AirQualitySliderProps> = ({
         </Flex>
       ) : (
         <>
-          <Flex mt="3">
+          <Flex mt="3" align="center" gap="1">
+            <Image src={imageSource} alt={imageTag} w="1rem" h="1rem" />
             <Text fontWeight="bold" fontSize="xl" color="#525252">
               {title}
             </Text>

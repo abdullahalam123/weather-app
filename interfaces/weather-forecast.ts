@@ -74,12 +74,23 @@ interface Hour {
   gust_kph: number;
   uv: number;
 }
+interface Astro {
+  sunrise: string;
+  sunset: string;
+  moonrise: string;
+  moonset: string;
+  moon_phase: string;
+  moon_illumination: number;
+  is_moon_up: number;
+  is_sun_up: number;
+}
 
 interface ForecastDay {
   date: string;
   date_epoch: number;
   day: Day;
   hour: Hour[];
+  astro: Astro;
 }
 
 interface Forecast {

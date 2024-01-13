@@ -2,16 +2,16 @@ import React from "react";
 import { Flex, Image, Spinner, Text } from "@chakra-ui/react";
 import { convertUnixTimestampToDateTime } from "@/constants";
 import { AirQualitySlider } from "..";
-import { MoreWeatherData, WeatherData } from "@/interfaces";
+import { MoreWeatherData, WeatherData, WeatherForecast } from "@/interfaces";
 
 interface WeatherAdditionalInfoBoxProps {
   weatherDataMore: MoreWeatherData;
-  weatherData: WeatherData;
+  forecastData: WeatherForecast;
   isLoading: boolean;
 }
 
 const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
-  weatherData,
+  forecastData,
   weatherDataMore,
   isLoading,
 }) => {
@@ -52,9 +52,7 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
                     Sunrise
                   </Text>
                   <Text>
-                    {convertUnixTimestampToDateTime(
-                      weatherData?.sys?.sunrise as number
-                    )}
+                    {forecastData?.forecast.forecastday[0].astro.sunrise}
                   </Text>
                 </Flex>
                 <Flex direction="column">
@@ -68,9 +66,7 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
                     Sunset
                   </Text>
                   <Text>
-                    {convertUnixTimestampToDateTime(
-                      weatherData?.sys?.sunset as number
-                    )}
+                    {forecastData?.forecast.forecastday[0].astro.sunset}
                   </Text>
                 </Flex>
               </Flex>
@@ -80,6 +76,8 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
 
         {/* UV INDEX */}
         <AirQualitySlider
+          imageTag="UV Index"
+          imageSource="lib/images/uv.png"
           isLoading={isLoading}
           title="UV Index"
           minValue={1}
@@ -91,6 +89,8 @@ const WeatherAdditionalInfoBox: React.FC<WeatherAdditionalInfoBoxProps> = ({
       {/* AIR POLLUTION */}
       <Flex>
         <AirQualitySlider
+          imageTag="Air Pollution"
+          imageSource="lib/images/air-pollution.png"
           isLoading={isLoading}
           title="Air Pollution"
           minValue={1}

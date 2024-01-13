@@ -48,9 +48,11 @@ export const WeatherForm = ({
   >([]);
 
   const fetchAddressSuggestions = async (input: string) => {
+    const cityName = input || "Assam";
+
     try {
       const response = await axios.get(
-        `https://api.weatherapi.com/v1/search.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${input}`
+        `https://api.weatherapi.com/v1/search.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${cityName}`
       );
 
       // Extract full address information from the response
@@ -81,11 +83,7 @@ export const WeatherForm = ({
       const result = await axios.get(
         `https://api.weatherapi.com/v1/current.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${city}&aqi=yes`
       );
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_KEY}&units=${unit}`
-      );
 
-      setWeatherData(response.data);
       setMoreWeatherData(result.data);
 
       // Save the searched city to local storage
@@ -98,7 +96,7 @@ export const WeatherForm = ({
       setIsLoading(false);
       setParentLoading(false);
       onClose();
-      console.error("Error fetching weather data:", error);
+      console.error("Error fetching normal weather data:", error);
     }
   };
 

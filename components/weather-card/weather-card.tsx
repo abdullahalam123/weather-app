@@ -7,21 +7,49 @@ import {
   weatherImageMapping,
 } from "../../constants";
 
-import { MoreWeatherData, WeatherData } from "../../interfaces";
 import { Clock } from "..";
+import { MoreWeatherData, WeatherForecast } from "../../interfaces";
 interface WeatherCardProps {
   today: Date;
-  weatherData: WeatherData | undefined;
+  forecastData: WeatherForecast | undefined;
   moreWeatherData: MoreWeatherData | undefined;
   isLoading: boolean;
 }
 
 export const WeatherCard: React.FC<WeatherCardProps> = ({
   today,
-  weatherData,
+  forecastData,
   moreWeatherData,
   isLoading,
 }) => {
+  // Check if weatherData is undefined or null
+  if (!forecastData) {
+    return (
+      <Flex
+        p="4"
+        mt="10"
+        borderRadius="0.75rem"
+        border="1px solid #e5e5e5"
+        direction="column"
+        w="370px"
+        h="430px"
+        boxShadow="lg"
+        justify="center"
+        align="center"
+      >
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Flex>
+    );
+  }
+
+  const { location, current, forecast } = forecastData;
+
   return (
     <Flex
       mt="10"
@@ -54,7 +82,7 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({
 
           {/* City name */}
           <Text px="6" mt="4" fontSize="18px" fontWeight="bold">
-            {weatherData?.name}
+            {forecastData?.location.name}
           </Text>
 
           {/* temperature  */}
@@ -74,15 +102,11 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({
             <Flex px="6" w="full" justifyContent="space-between">
               {/* weather description and image */}
               <Flex direction="column" alignSelf="flex-start" mt="14">
-                {weatherData &&
-                  weatherData.weather &&
-                  weatherData.weather[0] && (
+                {forecastData &&
+                  forecastData.forecast &&
+                  forecastData.location && (
                     <Image
-                      src={`lib/images/${
-                        (weatherImageMapping as Record<string, string>)[
-                          weatherData.weather[0].description
-                        ]
-                      }.png`}
+                      src={forecastData.current.condition.icon}
                       alt="Weather Image"
                       w="2.25rem"
                       h="2.25rem"
@@ -90,13 +114,18 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({
                   )}
 
                 <Text fontWeight="semibold" mt="2">
-                  {capitalizeFirstLetter(
-                    weatherData?.weather[0].description as string
-                  )}
+                  {capitalizeFirstLetter(forecastData?.current.condition.text)}
                 </Text>
                 <Text>
-                  H: {weatherData?.main.temp_max.toFixed(0)}° L:{" "}
-                  {weatherData?.main.temp_min.toFixed(0)}°{" "}
+                  H:{" "}
+                  {forecastData?.forecast.forecastday[0].day.maxtemp_c.toFixed(
+                    0
+                  )}
+                  ° L:{" "}
+                  {forecastData?.forecast.forecastday[0].day.mintemp_c.toFixed(
+                    0
+                  )}
+                  °{" "}
                 </Text>
               </Flex>
               {/* feels like */}

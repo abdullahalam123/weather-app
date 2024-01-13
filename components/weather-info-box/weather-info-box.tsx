@@ -18,7 +18,7 @@ export const WeatherInfoBox: React.FC<WeatherInfoBoxProps> = ({
       <Flex>
         <WeatherInfo
           isLoading={isLoading}
-          iconSrc="lib/images/humidity.png"
+          iconSrc="lib/images/precipitation.png"
           label="Precipitation"
           value={moreWeatherData?.current.precip_mm}
           symbol="mm"
